@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario - Inmobiliaria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">Portal Inmobiliario</a>
+            <div class="d-flex align-items-center">
+                <span class="navbar-text text-white me-3">
+                    Hola, <strong>{{ request.user.username }}</strong>
+                </span>
+                <a href="{% url 'home' %}" class="btn btn-outline-light btn-sm me-2">Ver Inmuebles</a>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <!-- Mensajes de alerta -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="row g-4 mb-5">
+            <!-- Datos del Usuario -->
+            <div class="col-12 col-md-5">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Datos Actuales de la Cuenta</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Usuario:</strong>
+                                <span>{{ request.user.username }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Nombre:</strong>
+                                <span>{{ request.user.first_name|default:"(No registrado)" }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Apellido:</strong>
+                                <span>{{ request.user.last_name|default:"(No registrado)" }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Correo:</strong>
+                                <span>{{ request.user.email|default:"(No registrado)" }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <strong>Tipo de Perfil:</strong>
+                                <span class="badge bg-success">
+                                    {% if request.user.is_staff %}
+                                        Arrendador / Administrador
+                                    {% else %}
+                                        Arrendatario / Arrendador
+                                    {% endif %}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modificar Datos Personales -->
+            <div class="col-12 col-md-7">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Modificar Datos Personales</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" novalidate>
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="mb-3">
+                                    <label for="{{ field.id_for_label }}" class="form-label fw-semibold">
+                                        {{ field.label }}
+                                    </label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <div class="text-danger small mt-1">
+                                            {{ field.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Actualizar mis datos</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requerimientos 1 y 2: Gestión de Inmuebles del Usuario (CRUD ORM) -->
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Mis Inmuebles Publicados</h5>
+                <a href="{% url 'inmueble_crear' %}" class="btn btn-success btn-sm">+ Agregar Inmueble</a>
+            </div>
+            <div class="card-body">
+                {% if mis_inmuebles %}
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Comuna</th>
+                                    <th>Precio</th>
+                                    <th class="text-end">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in mis_inmuebles %}
+                                    <tr>
+                                        <td><strong>{{ item.nombre }}</strong></td>
+                                        <td>{{ item.tipo_inmueble.nombre }}</td>
+                                        <td>{{ item.comuna.nombre }}</td>
+                                        <td class="text-success fw-bold">${{ item.precio }}</td>
+                                        <td class="text-end">
+                                            <a href="{% url 'inmueble_editar' item.pk %}" class="btn btn-sm btn-outline-primary me-1">Editar</a>
+                                            <a href="{% url 'inmueble_eliminar' item.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-secondary text-center mb-0">
+                        Aún no has publicado ningún inmueble. Haz clic en <strong>"+ Agregar Inmueble"</strong> para crear el primero.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

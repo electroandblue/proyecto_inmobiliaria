@@ -1,0 +1,37 @@
+[
+  {
+    "model": "inmuebles_app.tipoinmueble",
+    "pk": 1,
+    "fields": {
+      "nombre": "Casa"
+    }
+  },
+  {
+    "model": "inmuebles_app.tipoinmueble",
+    "pk": 2,
+    "fields": {
+      "nombre": "Departamento"
+    }
+  },
+  {
+    "model": "inmuebles_app.tipoinmueble",
+    "pk": 3,
+    "fields": {
+      "nombre": "Parcela"
+    }
+  },
+  {
+    "model": "inmuebles_app.tipoinmueble",
+    "pk": 4,
+    "fields": {
+      "nombre": "Oficina"
+    }
+  },
+  {
+    "model": "inmuebles_app.tipoinmueble",
+    "pk": 5,
+    "fields": {
+      "nombre": "Bodega"
+    }
+  }
+]

@@ -1,0 +1,31 @@
+============================================================
+LISTADO DE INMUEBLES PARA ARRIENDO SEPARADO POR COMUNAS
+============================================================
+
+COMUNA: PROVIDENCIA
+--------------------------------------------------
+• Nombre: Casa Colonial Amplia
+  Descripción: Casa tradicional con amplio patio y estacionamiento.
+
+• Nombre: Departamento Studio Moderno
+  Descripción: Departamento moderno ideal para estudiantes o persona sola.
+
+
+COMUNA: SANTIAGO
+--------------------------------------------------
+• Nombre: Oficina Central Torre A
+  Descripción: Espacio de trabajo céntrico ideal para consultoría o profesionales.
+
+
+COMUNA: TEMUCO
+--------------------------------------------------
+• Nombre: Parcela de Agrado con Cabaña
+  Descripción: Terreno natural con cabaña equipada y áreas verdes.
+
+
+COMUNA: VIÑA DEL MAR
+--------------------------------------------------
+• Nombre: Departamento Vista Mar
+  Descripción: Hermoso departamento frente al mar con excelente conectividad.
+
+

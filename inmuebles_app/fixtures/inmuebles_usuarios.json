@@ -1,0 +1,113 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$dummy$placeholderpasswordhash=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "arrendatario1",
+      "first_name": "Juan",
+      "last_name": "Pérez",
+      "email": "juan.perez@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$dummy$placeholderpasswordhash=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "agente1",
+      "first_name": "María",
+      "last_name": "González",
+      "email": "maria.gonzalez@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T12:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "inmuebles_app.inmueble",
+    "pk": 1,
+    "fields": {
+      "nombre": "Departamento Vista Mar",
+      "descripcion": "Hermoso departamento frente al mar con excelente conectividad.",
+      "direccion": "Av. Borgoño 1234",
+      "precio": "450000.00",
+      "m2_construidos": 65,
+      "habitaciones": 2,
+      "banos": 2,
+      "tipo_inmueble": 2,
+      "comuna": 8
+    }
+  },
+  {
+    "model": "inmuebles_app.inmueble",
+    "pk": 2,
+    "fields": {
+      "nombre": "Casa Colonial Amplia",
+      "descripcion": "Casa tradicional con amplio patio y estacionamiento.",
+      "direccion": "Calle Los Alerces 540",
+      "precio": "750000.00",
+      "m2_construidos": 140,
+      "habitaciones": 4,
+      "banos": 3,
+      "tipo_inmueble": 1,
+      "comuna": 10
+    }
+  },
+  {
+    "model": "inmuebles_app.inmueble",
+    "pk": 3,
+    "fields": {
+      "nombre": "Oficina Central Torre A",
+      "descripcion": "Espacio de trabajo céntrico ideal para consultoría o profesionales.",
+      "direccion": "Paseo Ahumada 800",
+      "precio": "380000.00",
+      "m2_construidos": 45,
+      "habitaciones": 2,
+      "banos": 1,
+      "tipo_inmueble": 4,
+      "comuna": 9
+    }
+  },
+  {
+    "model": "inmuebles_app.inmueble",
+    "pk": 4,
+    "fields": {
+      "nombre": "Parcela de Agrado con Cabaña",
+      "descripcion": "Terreno natural con cabaña equipada y áreas verdes.",
+      "direccion": "Camino El Volcán Km 15",
+      "precio": "600000.00",
+      "m2_construidos": 90,
+      "habitaciones": 3,
+      "banos": 2,
+      "tipo_inmueble": 3,
+      "comuna": 17
+    }
+  },
+  {
+    "model": "inmuebles_app.inmueble",
+    "pk": 5,
+    "fields": {
+      "nombre": "Departamento Studio Moderno",
+      "descripcion": "Departamento moderno ideal para estudiantes o persona sola.",
+      "direccion": "Av. Manuel Montt 900",
+      "precio": "320000.00",
+      "m2_construidos": 35,
+      "habitaciones": 1,
+      "banos": 1,
+      "tipo_inmueble": 2,
+      "comuna": 10
+    }
+  }
+]

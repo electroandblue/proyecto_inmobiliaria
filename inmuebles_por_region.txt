@@ -1,0 +1,33 @@
+============================================================
+LISTADO DE INMUEBLES PARA ARRIENDO SEPARADO POR REGIONES
+============================================================
+
+REGIÓN: LA ARAUCANÍA
+--------------------------------------------------
+• Inmueble: Parcela de Agrado con Cabaña
+  Descripción: Terreno natural con cabaña equipada y áreas verdes.
+  Precio Arriendo: $600000.00
+
+
+REGIÓN: METROPOLITANA DE SANTIAGO
+--------------------------------------------------
+• Inmueble: Casa Colonial Amplia
+  Descripción: Casa tradicional con amplio patio y estacionamiento.
+  Precio Arriendo: $750000.00
+
+• Inmueble: Departamento Studio Moderno
+  Descripción: Departamento moderno ideal para estudiantes o persona sola.
+  Precio Arriendo: $320000.00
+
+• Inmueble: Oficina Central Torre A
+  Descripción: Espacio de trabajo céntrico ideal para consultoría o profesionales.
+  Precio Arriendo: $380000.00
+
+
+REGIÓN: VALPARAÍSO
+--------------------------------------------------
+• Inmueble: Departamento Vista Mar
+  Descripción: Hermoso departamento frente al mar con excelente conectividad.
+  Precio Arriendo: $450000.00
+
+
