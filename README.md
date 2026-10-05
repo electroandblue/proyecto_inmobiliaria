@@ -52,26 +52,56 @@ El sistema integra comandos CLI ejecutables vía `manage.py` que utilizan consul
 
 ---
 
+# 🏠 Proyecto Inmobiliaria
+
+Aplicación web desarrollada con **Django y PostgreSQL** para la gestión de una plataforma inmobiliaria. El proyecto permite administrar información relacionada con inmuebles y usuarios, utilizando una base de datos PostgreSQL y fixtures para la carga inicial de datos.
+
 ## 🚀 Instalación y Puesta en Marcha
 
 ### 1. Clonar el repositorio
-```bash
-git clone [https://github.com/electroandblue/proyecto_inmobiliaria.git](https://github.com/electroandblue/proyecto_inmobiliaria.git)
-cd proyecto_inmobiliaria
-2. Configurar el entorno virtual
-Bash
-python -m venv env
-# En Windows:
-.\env\Scripts\activate
-# En Linux/Mac:
-source env/bin/activate
-3. Instalar dependencias
-Bash
-pip install django psycopg2-binary
-4. Configurar variables de base de datos
-Configurar las credenciales locales de PostgreSQL en sistema_arriendo/settings.py (o variables de entorno):
 
-Python
+```bash
+git clone https://github.com/electroandblue/proyecto_inmobiliaria.git
+cd proyecto_inmobiliaria
+```
+
+### 2. Configurar el entorno virtual
+
+Crear un entorno virtual para aislar las dependencias del proyecto:
+
+```bash
+python -m venv env
+```
+
+**En Windows:**
+
+```bash
+.\env\Scripts\activate
+```
+
+**En Linux/Mac:**
+
+```bash
+source env/bin/activate
+```
+
+### 3. Instalar las dependencias
+
+Con el entorno virtual activado, instalar Django y el driver para PostgreSQL:
+
+```bash
+pip install django psycopg2-binary
+```
+
+### 4. Configurar la base de datos
+
+El proyecto utiliza **PostgreSQL** como sistema gestor de base de datos.
+
+Configurar las credenciales locales de PostgreSQL en `sistema_arriendo/settings.py` o, preferentemente, mediante variables de entorno.
+
+Ejemplo de configuración:
+
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -82,16 +112,58 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-5. Aplicar migraciones y cargar fixtures
-Bash
+```
+
+> ⚠️ **Importante:** No subir contraseñas, credenciales ni otras variables sensibles directamente al repositorio. Para un entorno de producción se recomienda utilizar variables de entorno.
+
+### 5. Aplicar migraciones
+
+Ejecutar las migraciones de Django para crear las tablas necesarias en la base de datos:
+
+```bash
 python manage.py migrate
+```
+
+### 6. Cargar los datos iniciales
+
+El proyecto incluye fixtures con información inicial para los tipos de inmuebles y usuarios/inmuebles.
+
+Ejecutar:
+
+```bash
 python manage.py loaddata tipos_inmuebles.json
 python manage.py loaddata inmuebles_usuarios.json
-6. Ejecutar el servidor local
-Bash
+```
+
+### 7. Ejecutar el servidor local
+
+Iniciar el servidor de desarrollo de Django:
+
+```bash
 python manage.py runserver
-Acceder a la aplicación desde el navegador en http://127.0.0.1:8000/.
-👤 Autora
-Constanza Mena - Licenciada en Marketing Digital | Fullstack Python Trainee
-GitHub: @electroandblue
-LinkedIn: Constanza Mena
+```
+
+Luego, acceder a la aplicación desde el navegador:
+
+**http://127.0.0.1:8000/**
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+* **Python**
+* **Django**
+* **PostgreSQL**
+* **psycopg2-binary**
+* **HTML / CSS**
+* **Git / GitHub**
+
+---
+
+## 👤 Autora
+
+**Constanza Mena**
+Licenciada en Marketing Digital | Fullstack Python Trainee
+
+* 💻 GitHub: [@electroandblue](https://github.com/electroandblue)
+* 💼 LinkedIn: Constanza Mena
