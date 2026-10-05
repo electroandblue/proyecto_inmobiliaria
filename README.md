@@ -1,68 +1,97 @@
-# Proyecto: Manejo del CRUD - Hito 1
-
-**Programa:** Desarrollo de Aplicaciones Fullstack Python Trainee (SENCE / Desafío Latam)  
-**Proyecto:** Sistema de Arriendo de Inmuebles  
+# 🏢 Sistema de Gestión y Arriendo de Inmuebles
+> Plataforma web integral para la administración, publicación y consulta territorial de propiedades habitacionales, construida bajo el patrón arquitectónico MVT con Django, base de datos relacional PostgreSQL y estilizado responsivo con Bootstrap 5.
 
 ---
 
-## 1. Descripción del Proyecto
-
-El proyecto consiste en el desarrollo del backend inicial para una plataforma web dedicada a la publicación y gestión de arriendo de inmuebles. En este primer hito se configuró el entorno de desarrollo, la conexión a una base de datos relacional PostgreSQL, el diseño y modelado de datos mediante claves foráneas con el ORM de Django, y la implementación de las operaciones CRUD (Crear, Leer, Actualizar y Borrar).
+## 📌 Descripción General
+El proyecto consiste en una aplicación web desarrollada para optimizar el proceso de arriendo y administración de propiedades. La plataforma permite a los usuarios navegar por la oferta inmobiliaria disponible clasificada por región y comuna, registrarse e iniciar sesión de manera segura, y a los arrendadores gestionar el ciclo de vida completo de sus publicaciones (Crear, Consultar, Actualizar y Eliminar) mediante el ORM nativo de Django.
 
 ---
 
-## 2. Entorno y Tecnologías Utilizadas
-
+## 🛠️ Tecnologías y Entorno de Desarrollo
 * **Lenguaje:** Python 3.10+
-* **Framework:** Django 5.2+
+* **Framework Web:** Django 5.2+
 * **Base de Datos:** PostgreSQL
-* **Conector:** psycopg2-binary
-* **Entorno Virtual:** venv
+* **Driver de Conexión:** psycopg2-binary
+* **Frontend:** HTML5 semántico, CSS3, Bootstrap 5
+* **Gestión de Entorno:** Python venv
+* **Control de Versiones:** Git & GitHub
 
 ---
 
-## 3. Configuración y Conexión a la Base de Datos
+## 🏗️️ Arquitectura y Modelo Relacional
+El sistema modela la integridad territorial y habitacional a través de cuatro entidades principales vinculadas mediante claves foráneas (`models.ForeignKey`):
 
-En el archivo `sistema_arriendo/settings.py` se parametrizó la conexión a PostgreSQL con las credenciales locales:
+1. **`Region`:** Representa la división político-administrativa territorial.
+2. **`Comuna`:** Vinculada a una región mediante `region = models.ForeignKey(Region, on_delete=models.CASCADE)`.
+3. **`TipoInmueble`:** Clasificación de la propiedad (Casa, Departamento, Parcela, Oficina, etc.).
+4. **`Inmueble`:** Entidad central que almacena nombre, descripción, dirección, precio de arriendo, m² construidos, habitaciones, baños y su relación directa con `TipoInmueble` y `Comuna`.
+5. [ Region ] 1 ───< N [ Comuna ] 1 ───< N [ Inmueble ] >─── 1 [ TipoInmueble ]
+6. ## ✨ Funcionalidades Principales
 
-* **ENGINE:** `django.db.backends.postgresql`
-* **NAME:** `inmobiliaria_db`
-* **USER:** `postgres`
-* **HOST:** `localhost`
-* **PORT:** `5432`
+### 1. Manipulación de Datos y Ciclo CRUD (ORM)
+* **Creación:** Formulario interactivo (`InmuebleForm`) para la publicación de nuevas propiedades con validación de datos.
+* **Lectura y Catálogo:** Despliegue de tarjetas responsivas en la página principal (`/`) con la oferta de viviendas activas.
+* **Actualización:** Edición contextual de propiedades desde el panel de usuario (`/perfil/`).
+* **Eliminación:** Borrado seguro de registros en base de datos PostgreSQL con confirmación previa.
+
+### 2. Autenticación y Perfil de Usuario
+* Registro de usuarios mediante `UserCreationForm`.
+* Vistas de acceso y salida (`LoginView`, `LogoutView`) con control de sesiones y redireccionamientos seguros.
+* Panel privado (`/perfil/`) para visualizar credenciales del usuario y administrar sus propiedades publicadas.
+
+### 3. Comandos Personalizados de Reportes SQL (`management/commands`)
+El sistema integra comandos CLI ejecutables vía `manage.py` que utilizan consultas SQL directas (`django.db.connection`) para auditoría y reportería:
+* `python manage.py consulta_comunas`: Exporta las propiedades agrupadas por comuna en `inmuebles_por_comuna.txt`.
+* `python manage.py consulta_regiones`: Exporta el catálogo consolidado por regiones en `inmuebles_por_region.txt`.
+
+### 4. Panel de Administración Personalizado (Django Admin)
+* Modelos registrados con interfaces optimizadas (`ModelAdmin`).
+* Filtros laterales (`list_filter`) por comuna, región y tipo de vivienda.
+* Búsqueda en tiempo real (`search_fields`) por título, dirección y descripción.
 
 ---
 
-## 4. Modelos de Datos y Relaciones (ORM)
+## 🚀 Instalación y Puesta en Marcha
 
-Dentro de la aplicación `inmuebles_app`, en el archivo `models.py`, se implementaron dos entidades principales relacionadas mediante una clave foránea:
-
-1. **`TipoInmueble`:** Representa la categoría del inmueble (Casa, Departamento, etc.).
-2. **`Inmueble`:** Contiene los atributos de la propiedad (nombre, descripción, dirección, precio, m2 construidos, habitaciones, baños) y la clave foránea:
-   ```python
-   tipo_inmueble = models.ForeignKey(TipoInmueble, on_delete=models.CASCADE, related_name='inmuebles')
-   ```
-
-Las migraciones fueron generadas y aplicadas a PostgreSQL exitosamente mediante:
-
+### 1. Clonar el repositorio
 ```bash
-python manage.py makemigrations
+git clone [https://github.com/electroandblue/proyecto_inmobiliaria.git](https://github.com/electroandblue/proyecto_inmobiliaria.git)
+cd proyecto_inmobiliaria
+2. Configurar el entorno virtual
+Bash
+python -m venv env
+# En Windows:
+.\env\Scripts\activate
+# En Linux/Mac:
+source env/bin/activate
+3. Instalar dependencias
+Bash
+pip install django psycopg2-binary
+4. Configurar variables de base de datos
+Configurar las credenciales locales de PostgreSQL en sistema_arriendo/settings.py (o variables de entorno):
+
+Python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'inmobiliaria_db',
+        'USER': 'postgres',
+        'PASSWORD': 'tu_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+5. Aplicar migraciones y cargar fixtures
+Bash
 python manage.py migrate
-```
-
----
-
-## 5. Implementación de Operaciones CRUD
-
-Las operaciones de manipulación de datos requeridas fueron implementadas en el módulo `inmuebles_app/services.py`:
-
-* **a. Crear (`crear_inmueble`):** Valida la existencia del tipo de inmueble asociado y genera un nuevo registro persistente utilizando `Inmueble.objects.create(...)`.
-* **b. Enlistar (`listar_inmuebles`):** Recupera e imprime todas las instancias registradas con `Inmueble.objects.all()`.
-* **c. Actualizar (`actualizar_inmueble`):** Permite modificar campos específicos (como precio o dirección) y persistir el cambio mediante el método `.save()`.
-* **d. Borrar (`borrar_inmueble`):** Localiza el registro correspondiente mediante su ID y procede con su eliminación de la base de datos a través de `.delete()`.
-
-Todas las funciones fueron probadas y verificadas directamente en el shell interactivo de Django:
-
-```bash
-python manage.py shell
-```
+python manage.py loaddata tipos_inmuebles.json
+python manage.py loaddata inmuebles_usuarios.json
+6. Ejecutar el servidor local
+Bash
+python manage.py runserver
+Acceder a la aplicación desde el navegador en http://127.0.0.1:8000/.
+👤 Autora
+Constanza Mena - Licenciada en Marketing Digital | Fullstack Python Trainee
+GitHub: @electroandblue
+LinkedIn: Constanza Mena
